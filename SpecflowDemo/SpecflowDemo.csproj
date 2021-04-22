@@ -1,16 +1,42 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
+    <ShowTrace>true</ShowTrace>
+    <VerboseOutput>true</VerboseOutput>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="SpecFlow" Version="3.7.38" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.7.38" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.7.38" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <SpecFlowFeatureFiles Include="**\*.feature">
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature.cs</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Features\SpecFlowFeature.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Features\SpecFlowFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SpecFlowFeature.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+  
 </Project>
+
